@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NEXTflow
 
-## Getting Started
+NEXTflow is an LLM workflow platform built with `Next.js`, `TypeScript`, `React Flow`, `Zustand`, `Zod`, `Prisma`, and a product-oriented UI focused on node-based multimodal workflows.
 
-First, run the development server:
+The app includes:
+- 6 required node types
+- React Flow canvas with minimap and zoom/pan
+- full / selected / single-node execution
+- right-sidebar workflow run history
+- JSON import/export
+- seeded sample workflow
+- public marketing site, docs, contact, auth, and dashboard
+- Clerk-based authentication flow
+- Prisma/PostgreSQL-ready persistence
+- Trigger.dev / Gemini / Transloadit integration points with local fallbacks
+
+## Docs
+
+- [Project Overview](./docs/01-project-overview.md)
+- [How It Was Built](./docs/02-how-it-was-built.md)
+- [Setup Guide](./docs/03-setup-guide.md)
+- [Usage and Deployment Guide](./docs/04-usage-and-deployment.md)
+
+## Quick Start
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Copy envs:
+
+```bash
+cp .env.example .env.local
+```
+
+3. Start the app:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Verification
 
-## Learn More
+These checks were used during development:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+npm test
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Important Note
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Authentication is now Clerk-first.
 
-## Deploy on Vercel
+That means:
+- sign-in and sign-up routes are real auth entry points
+- dashboard and workflow routes are protected
+- if Clerk keys are missing, auth pages show a setup-required state instead of allowing fake local login
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The app can still render public pages without every external service configured, but real product access now requires Clerk.
